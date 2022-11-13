@@ -40,7 +40,7 @@ int main()
 				std::cout << "Incorect num; Again\n";
 				i--;
 			}
-			else coordinate[i] = temp - 47;
+			else coordinate[i] = temp - 48;
 		}
 		if (filed[coordinate[0]][coordinate[1]] != ' ')
 		{

@@ -31,6 +31,7 @@ int main()
 	bool bubble_envelope[12][12];
 	int count = sizeof(bubble_envelope);
 	int coordinate[4];
+	int temp = 0;
 
 	//inicialization bubble_envelope
 	for (int c = 0; c < 12; c++)
@@ -40,14 +41,18 @@ int main()
 			bubble_envelope[c][q] = true;
 		}
 	}
-
-	while (count != 0)
+	std::cout << "Poping bubbles from China\n" << std::endl;
+	while (count > 0)
 	{
-		std::cin >> coordinate[0] >> coordinate[1] >> coordinate[2] >> coordinate[3];
-		count = buble_poping(bubble_envelope, coordinate, count);
 		buble_pop(bubble_envelope);
-		std::cout << "Pop!\n";
-		//std::cout << count;
+		std::cout << std::endl  << "Input coordinats: ";
+		std::cin >> coordinate[0] >> coordinate[1] >> coordinate[2] >> coordinate[3];
+		temp = count;
+		count = buble_poping(bubble_envelope, coordinate, count);
+		for (int i = temp - count; i > 0; i-- ) std::cout << "Pop!\n";
+		std::cout << std::endl;
+		
 	}
+	std::cout << "Babbles end.";
 	return 0;
 }

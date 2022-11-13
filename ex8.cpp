@@ -31,16 +31,16 @@ void arrange_ship(bool sea_battle[][10])
 	int temp;
 
 	// 4[i]
-	/*for (int i = 4; i > 0; i--)
+	for (int i = 4; i > 0; i--)
 	{
 		std::cout << "You can stay [I] (one cells) " << i << " ships\nCoordinate: ";
 		for (int i = 0; i < 2;i++)std::cin >> coordinata[i];
 		if (!(sea_battle[coordinata[0]][coordinata[1]])) sea_battle[coordinata[0]][coordinata[1]] = true;
 		display_(sea_battle);
-	}*/
+	}
 	
 	//3[II]
-	/*for (int i = 3; i > 0; i--)
+	for (int i = 3; i > 0; i--)
 	{
 		std::cout << "You can stay [I][I](two cells)" << i << " ships\nCoordinate: ";
 		for (int i = 0; i < 4;i++)std::cin >> coordinata[i];
@@ -61,7 +61,7 @@ void arrange_ship(bool sea_battle[][10])
 		}
 		std::cout << std::endl;
 		display_(sea_battle);
-	}*/
+	}
 	
 	//2[III]
 
@@ -76,9 +76,9 @@ void arrange_ship(bool sea_battle[][10])
 			|| (3 == (std::abs(coordinata[1] - coordinata[3]) + 1));
 		
 		bool right = place && distance && !(sea_battle[coordinata[0]][coordinata[1]])
-									   && !(sea_battle[coordinata[2]][coordinata[3]])
-									   && (!(sea_battle[coordinata[2]][coordinata[3]+1]) 
-									        || !(sea_battle[coordinata[0]+1][coordinata[1]])); 
+			&& !(sea_battle[coordinata[2]][coordinata[3]])
+			&& (!(sea_battle[coordinata[2]][coordinata[3] + (coordinata[3] > coordinata[1] ? -1: 1)])
+									        || !(sea_battle[coordinata[0] + (coordinata[0] > coordinata[2] ? -1 : 1)][coordinata[1]]));
 										// если ставить друг над другом. выдаёт ошибку
 
 		if (right)

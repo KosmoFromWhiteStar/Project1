@@ -1,36 +1,36 @@
 #include <iostream>
 #include <cassert>
 
-//void fight(bool battlefield[][10], bool shoots[][10])
-//{
-//	std::cout << std::endl;
-//	for (int y = -2; y < 10; y++)
-//	{
-//		for (int x = -2; x < 10; x++)
-//		{
-//			if (!(x == -2 && y == -2))
-//			{
-//				if (y < -1 && x < 0)std::cout << " ";
-//				if (y < 0 && x == -1)std::cout << "  ";
-//				if (x == -1 && y == -1)std::cout << "+";
-//				if (y == -2 && x >= 0) std::cout << " " << x << "  ";
-//				else if (y == -1 && x >= 0) std::cout << "----";
-//				if (x == -2 && y >= 0) std::cout << y << ' ';
-//				else if (x == -1 && y >= 0) std::cout << "|";
-//
-//				if (x >= 0 && y >= 0)
-//				{
-//					bool tempo = shoots[x][y];
-//					if (battlefield[x][y] && shoots[x][y])std::cout << " X  ";
-//					else if (!battlefield[x][y] && shoots[x][y]) std::cout << " M  ";
-//					else std::cout << " 0  ";
-//				}
-//			}
-//		}
-//		std::cout << std::endl;
-//	}
-//	std::cout << std::endl;
-//}
+void fight(bool battlefield[][10], bool shoots[][10])
+{
+	std::cout << std::endl;
+	for (int y = -2; y < 10; y++)
+	{
+		for (int x = -2; x < 10; x++)
+		{
+			if (!(x == -2 && y == -2))
+			{
+				if (y < -1 && x < 0)std::cout << " ";
+				if (y < 0 && x == -1)std::cout << "  ";
+				if (x == -1 && y == -1)std::cout << "+";
+				if (y == -2 && x >= 0) std::cout << " " << x << "  ";
+				else if (y == -1 && x >= 0) std::cout << "----";
+				if (x == -2 && y >= 0) std::cout << y << ' ';
+				else if (x == -1 && y >= 0) std::cout << "|";
+
+				if (x >= 0 && y >= 0)
+				{
+					bool tempo = shoots[x][y];
+					if (battlefield[x][y] && shoots[x][y])std::cout << " X  ";
+					else if (!battlefield[x][y] && shoots[x][y]) std::cout << " M  ";
+					else std::cout << " -  ";
+				}
+			}
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
 void display_(bool battlefield[][10])
 {
 	std::cout << std::endl;
@@ -47,7 +47,7 @@ void display_(bool battlefield[][10])
 				else if (y == -1 && x >= 0) std::cout << "----";
 				if (x == -2 && y >= 0) std::cout << y << ' ';
 				else if (x == -1 && y >= 0) std::cout << "|";
-				if (x >= 0 && y >= 0) std::cout << (battlefield[x][y] ? "[I]" : " 0 ") << " ";
+				if (x >= 0 && y >= 0) std::cout << (battlefield[x][y] ? "[I]" : " - ") << " ";
 			}
 		}
 		std::cout << std::endl;
@@ -84,6 +84,8 @@ void battle(bool battledield_p1[][10], bool battledield_p2[][10], std::string na
 			shoots_p1[coordinate_shoots[0]][coordinate_shoots[1]] = true; // не присваевает значение тру
 			position[i]--;
 			tempo = shoots_p1[coordinate_shoots[0]][coordinate_shoots[1]];
+			std::cout << "Shoots 1st player\n";
+			fight(battledield_p1, shoots_p1);
 		}
 
 
@@ -91,14 +93,16 @@ void battle(bool battledield_p1[][10], bool battledield_p2[][10], std::string na
 		{
 			shoots_p2[coordinate_shoots[0]][coordinate_shoots[1]] = true;
 			position[i]--;
+			std::cout << "Shoots 2nd player\n";
+			fight(battledield_p1, shoots_p2);
 		}
-		//fight(battledield_p1, shoots_p1);
+		
+		if (position[0] == 0) break;
+		else if (position[1] == 0)break;
 
 		std::cout << std::endl;
 		i++;
 		i = i % 2;
-		display_(shoots_p1);
-		display_(shoots_p2);
 	}
 	std::cout << " Win " << (position[0] > position[1] ? name[0] : name[1]) << ". Congratulete.";
 }
@@ -266,8 +270,5 @@ int main()
 
 	std::cout << "Start battle!!\n";
 	battle(sea_battle_field_p1, sea_battle_field_p2, p);
-
-
-
-
+	return 0;
 }
